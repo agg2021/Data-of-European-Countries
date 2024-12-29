@@ -1,0 +1,107 @@
+#program to store the population, area & density of a list of European countries.
+#Initialise variables
+countries =[["Germany",82,357,230],["France",66,547,121],["Spain",47,505,93]]
+choice = ""  #empty string variable to refer to human choice eg A, B, C or Q
+
+# WHILE loop that repeats on the condition that choice is not equal to "Q
+#.....Start While loop..........
+while choice != "Q":
+    #Display menu of choices - note use of triple quotes " " "
+    print(""")
+European Countries Population Computer
+Please choose one of the following options:
+A  Print out the list of countries and their data
+B  Search for a particular country
+C  Add the details for a new country 
+Q  Quit""")
+    #Prompt the user to enter a choice and turn it into upper case 
+    choice = input("Select one of the choices(A,B,C or Q):  ")
+    choice = choice.upper()  #change b to B
+    print(" ................................................ ")
+    #Use a simple IF THEN ELSE IF construct to make the correct choice.
+    #.......option A Print the countries..........
+    if choice == "A":
+        print("Welcome to option A")
+    displayCountry()
+        #One country "record" is: ["Germany",82,357,230]
+        #First Print HEADERS or title - Use string JUSTIFICATION in columns
+        print("Country".center(15), "Population".center(15), "Area 1000 km2".center(15),
+       Density.(center))
+        #FOR EACH country in list print out the country
+        for country in countries:
+            for item in country:
+                print(str(item).ljust(20), end="") #change everything to string for justification
+            #end for item loop ............
+            print()
+        #end for each loop .............................
+        print()
+    # ................  option B ...... search for a particular country
+elif choice == "B":
+        print("Welcome to option B")
+        #prompt the user to enter the name of a country
+        searchCountry = input("Input the name of the country you want me to search for: ")
+        searchCountry = searchCountry.title()  #change fraNCE to France
+        #Use a FOR INDEX RANGE loop to iterate over the list looking for that country
+        #We will need the INDEX of where the country was found
+        cFound = False  #set boolean flag to false
+        cIndex = -1 #integer variable to hold the index of a found country
+        #START FOR INDEX RANGE loop - cFound will set to True if country found
+        for index in range(len(countries)):
+            country = countries[index][0] #name of country is first or 0 element
+            if country == searchCountry:
+                cFound = True
+                cIndex = index
+            #end if
+        #END FOR INDEX loop
+        #IF the country is found then print out the details for that country
+        if cFound:
+            print(countries[cIndex])
+        else:
+            #ELSE (country not found) print out an error message saying that the country is not in the list
+            print(searchCountry, " not found so not in the list.")
+        #end if then else
+    #............. option C add the details for a new country
+    elif choice == "C":
+        print("Welcome to option C")
+        #prompt the user to type the name for a new country
+        newCountry = input("Type the name of the new country you want to create: ")
+        newCountry = newCountry.title() # change france to France
+        #use FOR EACH loop to check if the country already exists
+        cFound = False
+        #START FOR EACH loop - cFound will set to True if country found
+        for country in countries:
+            name = country[0]
+            if name == newCountry:
+                cFound = True
+  #end if
+        #END FOR EACH loop
+        #If the country does not exist: (cFound = False)
+        if not cFound:
+            #     Prompt the user for the country's population in millions
+            population = int(input("Population in Millions please: "))
+            #     Prompt the user for the country's area in 1000 km2
+            area = int(input("Area in 1000 km2 please: "))
+            #     Calculate the country's density as a whole number
+            #Note population * million and area * 1000 so that it is pop/km2
+            # // integer division is the simplest way to get an integer result
+            #note that this is not quite the same as round and then change to an integer
+            density = (population * 1000000) / (area * 1000)
+            #     Make a record (list) of the new data and append it to the main list
+            newCountryRecord = [newCountry, population, area, density]
+            countries.append(newCountryRecord)
+        else:
+            #ELSE the country does already exist: (cFound = True)
+            #   Output an error message and do nothing to the main list
+            print(newCountry, " already exists in my list!")
+        #end if then else
+    #....................  option Q quit
+    elif choice == "Q":
+        print("Goodbye")
+    #"final" ELSE to "catch" for any choice that is not A, B, C, or Q
+    #display an error message and carry on.
+    else:
+        print("Not a valid choice")
+    #.......end else..........    
+#.....End While loop.....................................................................................
+print("End of Program")
+print()
